@@ -7,7 +7,7 @@ use project;
 # 3) Checking the databases created 
 show databases
 
-# Creating a table 
+# 4) Creating a table 
 CREATE TABLE `project`.`olympics` (
   `ID` VARCHAR(45) NULL,
   `Name` VARCHAR(100) NULL,
@@ -25,32 +25,32 @@ CREATE TABLE `project`.`olympics` (
   `Event` VARCHAR(255) NULL,
   `Medal` VARCHAR(45) NULL);
 
-# 4) To read the file in MySQL 
+# 5) To read the file in MySQL 
 Load data infile "athlete_events.csv" into table olympics fields terminated by ',' 
 lines terminated by '\n\r' ignore 1 lines
 
-# 5) Selecting all the values present in the database
+# 6) Selecting all the values present in the database
 select * from olympics
 
-# 5) Medals won in the year of 2016 
+# 7) Medals won in the year of 2016 
 Select * from olympics where (Medal="Gold" OR Medal = "silver" OR Medal = "Bronze") AND Year=2016
 
-# 6) Only in Athletics how many of them won gold medal from which team, name, year of winning
+# 8) Only in Athletics how many of them won gold medal from which team, name, year of winning
 select * from olympics where sport ="Athletics" AND Medal =("Gold") OR Medal="Silver" OR Medal ="Bronze"
 
-# 7) Players only from the indian team 
+# 9) Players only from the indian team 
 select * from olympics where Team = "India"
 
-# 8) Team only from China, India and United States
+# 10) Team only from China, India and United States
 select * from olympics where Team in ("China", "India", "United States")
 
-# 9) Sport held between the year 2012-2016 
+# 11) Sport held between the year 2012-2016 
 select * from olympics where year between 2012 and 2016 and Medal= "Gold" and Sex ="M" order by ID
 
-# 10) Only select the different sports
+# 12) Only select the different sports
 select  distinct(sport) from olympics
 
-# 11) To find in which event india has won the highest medals?
+# 13) To find in which event india has won the highest medals?
 SELECT event,COUNT(medal)
 FROM olympics
 WHERE team='India'
@@ -58,21 +58,21 @@ AND medal <> 'NA'
 GROUP BY event
 ORDER BY COUNT(medal) DESC;
 
-# 12) Identify the event which was played most consecutively in the summer Olympics games?
+# 14) Identify the event which was played most consecutively in the summer Olympics games?
 SELECT event, COUNT( event)
 FROM olympics
 WHERE season='Summer'
 GROUP BY event
 ORDER BY COUNT(event) DESC;
 
-# 13) Which country have won most medals
+# 15) Which country have won most medals
 SELECT noc,COUNT(medal)
 FROM olympics
 WHERE medal<> 'NA'
 GROUP BY noc
 ORDER BY COUNT(medal) desc;
 
-# 14) Which countries won maximum medal in one year and in which year
+# 16) Which countries won maximum medal in one year and in which year
 SELECT noc, year, COUNT(medal) AS total_medals
 FROM olympics
 WHERE medal <> 'NA'
@@ -81,8 +81,8 @@ ORDER BY total_medals DESC
 LIMIT 1;
 
 
-# 15) For deleting the table olympics
+# 17) For deleting the table olympics
 drop table olympics
 
-# 16) For deleting the database
+# 18) For deleting the database
 drop database project
